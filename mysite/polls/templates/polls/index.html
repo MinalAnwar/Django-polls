@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Questions</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'polls/index.css' %}">
+</head>
+<body>
+    <h1>List of Questions</h1>
+
+    {% if latest_question_list %}
+        <ul>
+            {% for question in latest_question_list %}
+                {% comment %} this is hard coded url to make it correct and dynamic we canuse the name attribute used in urls.py {% endcomment %}
+                {% comment %} <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> {% endcomment %}
+                <li><a href="{% url 'polls:detail' question.id%}">{{question.question_text}}</a></li>
+                {% comment %} use the polls:detail for name spaceing can use detail only {% endcomment %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+</body>
+</html>
